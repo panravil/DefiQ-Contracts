@@ -4,9 +4,9 @@ import "https://github.com/Uniswap/uniswap-v2-periphery/blob/master/contracts/in
 import "./DefiQStake.sol";
 
 contract DefiQContract {
-    address internal constant UNISWAP_ROUTER_ADDRESS = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
-    address internal constant DAI_TOKEN_ADDRESS = 0xaD6D458402F60fD3Bd25163575031ACDce07538D;
-    address internal constant STAKE_CONTRACT_ADDRESS = 0x7D5DA3B481D4a6baF101ED42a06bD10aBfFBa492;
+    address internal constant UNISWAP_ROUTER_ADDRESS = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D; // Uniswap Roter Address
+    address internal constant DAI_TOKEN_ADDRESS = 0xaD6D458402F60fD3Bd25163575031ACDce07538D; // Dai Token Address
+    address internal constant STAKE_CONTRACT_ADDRESS = 0x5eCd54c4034a73A8AFe7e40132B5a241143a8725; // Staking Conract Address
     
     DefiQStake public defiqStake;
     IERC20 public dai;
@@ -33,7 +33,7 @@ contract DefiQContract {
         dai.approve(STAKE_CONTRACT_ADDRESS, outputAmount);
         
         // Deposit to Stake Contract
-        defiqStake.deposit(address(this), outputAmount);
+        defiqStake.deposit(msg.sender, address(this), outputAmount);
         
         return true;
     }
